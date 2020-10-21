@@ -4,26 +4,26 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
         
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Kvrmnks's Blog</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>最小点覆盖问题的几种近似算法 - Kvrmnks's Blog</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
-        <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap.min.js" defer></script>
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Kvrmnks's Blog</a>
+                <a class="navbar-brand" href="../..">Kvrmnks's Blog</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -33,14 +33,14 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
-                                <a href="." class="nav-link">Home</a>
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
-                                <a href="about/" class="nav-link">About</a>
+                                <a href="../../about/" class="nav-link">About</a>
                             </li>
                             <li class="navitem">
-                                <a href="blog/" class="nav-link">Blog</a>
+                                <a href="../" class="nav-link">Blog</a>
                             </li>
                         </ul>
 
@@ -50,16 +50,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="about/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -78,8 +68,20 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#welcome-to-kvrmnkss-blog" class="nav-link">Welcome to Kvrmnks's Blog</a>
+            <li class="nav-item" data-level="1"><a href="#_1" class="nav-link">最小点覆盖问题的几种近似算法</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">最小点覆盖问题</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#vc" class="nav-link">VC的一种组合技术的近似算法</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#vc_1" class="nav-link">VC的一种基于线性规划的近似算法</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -87,8 +89,29 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="welcome-to-kvrmnkss-blog">Welcome to Kvrmnks's Blog</h2>
-<p>2333333</p></div>
+<h1 id="_1">最小点覆盖问题的几种近似算法</h1>
+<h2 id="_2">最小点覆盖问题</h2>
+<p>最小点覆盖是这样一个问题, 给一张图<script type="math/tex">G = <V, E></script> , 求一个势最小的集合<script type="math/tex">A \subset V,s.t. \forall ab\in E,a\in A \bigvee b\in A</script>.</p>
+<p>一般用<script type="math/tex">VC</script>来表示这个问题.</p>
+<h2 id="vc">VC的一种组合技术的近似算法</h2>
+<p>一般所谓组合技术, 也并没有多大的难处.</p>
+<p>贪就完事了.</p>
+<p>按照某个顺序枚举每条边, 如果这条边的两个关联点没有被加入到<script type="math/tex">A</script>集合中去的话, 就全加入到<script type="math/tex">A</script>中.</p>
+<p>不妨设最后<script type="math/tex">|A|=2t</script>.</p>
+<p>现在来估计一下最优解的大小.</p>
+<p>先给出答案好了一定大于<script type="math/tex">t</script>, 若是小于<script type="math/tex">t</script>的话, 按照上述的顺序枚举, 一定会发现一条不被覆盖的边.于是近似上界为<script type="math/tex">\frac{2t}{t} = t</script>
+</p>
+<p>这是个相当容易分析的算法.</p>
+<h2 id="vc_1">VC的一种基于线性规划的近似算法</h2>
+<p>我们可以先花10s来想一想怎么把<script type="math/tex">VC</script>表达成整数规划问题.</p>
+<p>设<script type="math/tex">x_{i}</script>为<script type="math/tex">i</script>点是不是被加入到<script type="math/tex">A</script>中, 于是<script type="math/tex">x_{i}\in \{0,1\}</script>, 显然优化函数为<script type="math/tex">\min{\sum_{i=1}^{v}x_{i}}</script>, 约束条件为<script type="math/tex">x_{i}+x_{j} \geq 1, ij \in E</script> 以及 <script type="math/tex">x_{i}\in \{0,1\}</script>.</p>
+<p>但是这样还是<script type="math/tex">NP</script>问题, 我们对其中的整数型变量进行松弛, 即<script type="math/tex">x_{i} \geq 0</script>.</p>
+<p>现在就变成了一种线性规划问题. 可以通过椭球算法求解, 总之是一个<script type="math/tex">P</script>问题了.</p>
+<p>之后要想办法把线性规划得到的解, 进行取整还原回原问题.</p>
+<p>这一步骤就叫"取整", 这一步的性能对整个算法的性能有着很大的影响.</p>
+<p>在这个问题中如果<script type="math/tex">x_{i} \geq \frac{1}{2}</script>, 我们就把它加入到<script type="math/tex">A</script>中, 这样可以保证每条边都被覆盖了, 证明可以通过反证法简单的得到, 这里就不再写了.</p>
+<p>根据整数规划变换到线性规划的部分, 线性规划的解一定不会劣于整数规划得到的解.</p>
+<p>由<script type="math/tex">2x_{i} \geq 1</script>, 得到近似上界为2 (我实在不想写了咕咕咕</p></div>
             </div>
         </div>
 
@@ -97,12 +120,12 @@
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = ".",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js" defer></script>
+        <script src="../../js/base.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-        <script src="search/main.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -170,8 +193,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.1.2
-Build Date UTC : 2020-10-21 08:10:29.758133+00:00
--->
