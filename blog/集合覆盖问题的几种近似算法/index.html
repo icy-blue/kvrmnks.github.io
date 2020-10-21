@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>集合覆盖问题的几种近似算法 - Kvrmnks's Blog</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Kvrmnks's Blog</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../about/" class="nav-link">About</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../" class="nav-link">Blog</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#_1" class="nav-link">集合覆盖问题的几种近似算法</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">问题简介</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">基于线性规划的集合最小覆盖的近似算法</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">基于组合方法的集合覆盖算法</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="_1">集合覆盖问题的几种近似算法</h1>
+<h2 id="_2">问题简介</h2>
+<p>给定一个有限非空集合<script type="math/tex">A</script>, 定义集合(集群)<script type="math/tex">S, s.t.\forall x\in S, s \subset A</script>, 求解一个指标集<script type="math/tex">I</script>, 满足<script type="math/tex">\bigcup _{i=1}^{|I|}S_{i} = A</script>
+</p>
+<p>使得<script type="math/tex">|I|</script>最小.</p>
+<h2 id="_3">基于线性规划的集合最小覆盖的近似算法</h2>
+<p>首先花30s将这个问题转化成线性规划的形式.</p>
+<p>另外既然都用线性规划了, 不妨再给集群<script type="math/tex">S</script>的每个元素加个权值函数.</p>
+<p>不妨令<script type="math/tex">|A| = n, |S| = m</script>, 假设<script type="math/tex">m</script>个变量, 对于<script type="math/tex">x_{i}</script>表示集群中的第<script type="math/tex">i</script>个集合选或者不选.</p>
+<p>于是<script type="math/tex">x \in \{0,1\}</script>
+</p>
+<p>定义权函数<script type="math/tex">W: x \rightarrow R, x\in S</script> .</p>
+<p>于是最小化函数为<script type="math/tex">\sum W(x_{i})x_{i}</script>
+</p>
+<p>首先朴素的约束, <script type="math/tex">x_{i} \in \{0,1\}</script>
+</p>
+<p>对于集合<script type="math/tex">A</script>第<script type="math/tex">j</script>个元素, <script type="math/tex">\sum x_{i} \geq 1 , A_{j} \in S_{i}</script>
+</p>
+<p>按照线性规划设计近似算法的理论, 首先把上述整数规划问题转化为线性规划.</p>
+<p>说了这么多, 其实就是把变量的定义域换成<script type="math/tex">[0, \infty]</script>.</p>
+<p>为了方便之后的分析, 假设<script type="math/tex">k = \max(|S_{i}|,S_{i} \in S)</script>
+</p>
+<p>如果<script type="math/tex">x_{i} \geq \frac{1}{k}</script>, 则代表选择这个集合, 根据反证法, 这样得到的一定是一个可行解, 证明比较简答, 这里就不说了.</p>
+<p>下面进行近似上界的分析.</p>
+<p>依旧是依托这个不等式<script type="math/tex">x_{i} \geq \frac{1}{k}</script>, 对每个集合<script type="math/tex">i</script>求和得到并且<script type="math/tex">k\sum w_{i}x_{i} \geq \sum w_{i}</script>
+</p>
+<p>于是得到近似上界为<script type="math/tex">k</script>
+</p>
+<h2 id="_4">基于组合方法的集合覆盖算法</h2>
+<p>依旧是很朴素的贪心方法, 即每次选取最多的能够多覆盖的集合.</p>
+<p>为了描述方便, 定义<script type="math/tex">Set_{i,j}</script>表示第<script type="math/tex">i</script>次贪心之后的<script type="math/tex">S_{j}</script>.</p>
+<p>每次贪心, 找到<script type="math/tex">S</script>中最大的元素, 维护一个已经被覆盖的元素集合<script type="math/tex">Cov</script>, 将找到的最大的集合中的元素并入<script type="math/tex">Cov</script>中, 并把这些元素从<script type="math/tex">S</script>中剔除出去.</p>
+<h3 id="_5">引理</h3>
+<p>假设上述算法进行了<script type="math/tex">t</script>次, 则对于任意一种覆盖方式<script type="math/tex">C</script>.</p>
+<p>设集类<script type="math/tex">S</script>中最大的元素大小为<script type="math/tex">k</script>
+</p>
+<p>满足<script type="math/tex; mode=display">t \leq \sum_{s\in C}\sum_{i=1}^{|s|}\frac{1}{i}</script>
+</p>
+<p>应用归纳法进行证明.</p>
+<p>首先当<script type="math/tex">k=1</script>时, 显然等号成立.</p>
+<p>不妨假设<script type="math/tex">k=p-1</script>时成立.</p>
+<p>当<script type="math/tex">k=p</script>时, 考虑整个贪心过程中, 选择集合的大小是单调不增的, 也就是存在一个边界值<script type="math/tex">\hat{t}</script>, 使得在<script type="math/tex">\hat{t}</script>时刻之后选择的集合的大小都小于<script type="math/tex">p</script>
+</p>
+<p>根据归纳假设得到<script type="math/tex">t-\hat{t} \leq \sum_{\hat{c}}\sum_{i=1}^{|s_{\hat{t},j}|}\frac{1}{i}</script>
+</p>
+<p>考虑时刻<script type="math/tex">1-\hat{t}</script>时, 考虑对这一部分进行一个估价, 因为在前<script type="math/tex">\hat{t}</script>次中, 每次取走的元素个数一定是大于等于<script type="math/tex">k</script>的, </p>
+<p>于是有不等式<script type="math/tex">\hat{t} \leq \frac{Cov_{\hat{t}}}{k}</script>
+</p>
+<p>考虑对<script type="math/tex">Cov_{\hat{t}}</script>的大小进行估计, 显然(并不显然)<script type="math/tex">|Cov_{i}| \leq \sum |Set[0][i] - Set[\hat{t}][i]|</script>
+</p>
+<p>稍微展开一下<script type="math/tex">|Cov_{i}| \leq \sum_{i \in M_{1}}\sum_{Set[\hat{t}][i]+1}^{Set[0][i]}</script>
+</p>
+<p>于是有<script type="math/tex">Cov_{i} \leq \sum_{i \in \hat{c}}\sum_{Set[\hat{t}][i]+1}^{Set[0][i]}</script>
+</p>
+<p>注意这里<script type="math/tex">M_{1} 与 M_{2}</script>是<strong>近乎等价</strong>的</p>
+<p>
+<script type="math/tex; mode=display">\hat{t} \leq \sum_{i \in \hat{c}}\sum_{Set[\hat{t}][i]+1}^{Set[0][i]}\frac{1}{k} \leq \sum_{i \in \hat{c}}\sum_{Set[\hat{t}][i]+1}^{Set[0][i]}\frac{1}{j}</script>
+</p>
+<p>于是<script type="math/tex; mode=display">t \leq \sum_{i \in \hat{C}} \sum_{1}^{Set[0][i]}\frac{1}{j}</script>
+</p>
+<p>于是近似上界<script type="math/tex">ln(k)</script>
+</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
