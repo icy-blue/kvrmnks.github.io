@@ -82,6 +82,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#_6" class="nav-link">基于原始对偶方法的集合最小覆盖的近似算法</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -150,6 +154,49 @@
 <p>于是<script type="math/tex; mode=display">t \leq \sum_{i \in \hat{C}} \sum_{1}^{Set[0][i]}\frac{1}{j}</script>
 </p>
 <p>于是近似上界<script type="math/tex">ln(k)</script>
+</p>
+<h2 id="_6">基于原始对偶方法的集合最小覆盖的近似算法</h2>
+<p>首先沿用上面的整数规划转换成线性规划的步骤, 即.</p>
+<p>最小化<script type="math/tex">\sum w_{i}x_{i}</script>
+</p>
+<p>约束条件为<script type="math/tex">\sum_{e_{j} \in x_{i}}x_{i} \geq 1</script>
+</p>
+<p>
+<script type="math/tex">x_{i}\geq 0</script>
+</p>
+<p>原始对偶方法是指首先将松弛后的线性规划方法进行对偶, 取其对偶问题, 通过对对偶问题进行进一步的分析.</p>
+<p>注意这里的进一步分析是指不一定要通过运筹学的一些固有方式, 包括组合技术的一些方式也是可以使用的.</p>
+<p>由于对偶问题的固有性质, 对偶问题的一个可行解天然就成了最优解的一个界.</p>
+<p>转对偶问题得到</p>
+<p>最大化<script type="math/tex">\sum{y_i}</script>
+</p>
+<p>约束条件为<script type="math/tex">\sum_{e_{j} \in x_{i}}y_{j} \leq w_{i}</script>
+</p>
+<p>
+<script type="math/tex">y_{i} \geq 0</script>
+</p>
+<p>这里采用的依旧是组合技术来优化对偶问题.</p>
+<p>由对偶问题的性质可以知道我们要尽可能的使得和尽量大来逼近最优值.</p>
+<p>这里通过以下方式逐步优化对偶问题的解.</p>
+<p>初始情况下<script type="math/tex">y_{i} = 0</script>
+</p>
+<p>这显然是对偶问题的一个可行解, 但是不一定是原问题的一个可行解.</p>
+<p>按照某个顺序枚举集合中的元素, 动态维护集群中选了哪些集合.</p>
+<p>若某个元素<script type="math/tex">e_{i}</script>这个时候没有被覆盖, 我们想办法提高<script type="math/tex">y_{i}</script>的值, 知道某个约束条件被严格满足.</p>
+<p>显然这样做之后依旧是一个可行解, 且想法十分的单纯, 当找到那个约束被严格满足的集合, 加入动态维护的集合中去.</p>
+<p>这样一路贪心下来就得到了一个集群<script type="math/tex">I</script>, 表示哪些集合被选取了, 且由贪心过程一定覆盖了<script type="math/tex">A</script>
+</p>
+<p>下面开始分析这个做法的近似度.</p>
+<p>
+<script type="math/tex">\sum_{i\in I} w_{i} = \sum_{i \in I} \sum_{e_{j} \in i}y_{j}</script>
+</p>
+<p>假设集群中元素最大为<script type="math/tex">k</script>
+</p>
+<p>上式放缩得到</p>
+<p>
+<script type="math/tex">\sum_{i \in I}\sum_{e_{j} \in i} y_{i} \leq k\sum{y_i} \leq k*OPT</script>
+</p>
+<p>于是近似度为<script type="math/tex">k</script>
 </p></div>
             </div>
         </div>
