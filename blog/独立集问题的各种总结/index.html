@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>独立集问题的各种总结 - Kvrmnks's Blog</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Kvrmnks's Blog</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../about/" class="nav-link">About</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../" class="nav-link">Blog</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">顶点覆盖问题的各种总结</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="_1">顶点覆盖问题的各种总结</h2>
+<h3 id="_2">顶点覆盖问题</h3>
+<p>有一张图<script type="math/tex">G=<V,E></script>，找到一个<script type="math/tex">V</script>的一个子集<script type="math/tex">S</script>，<script type="math/tex">s.t. \forall a,b\in E,a\in S</script>或<script type="math/tex">b\in S</script>。</p>
+<p>判定性的问题是，给定一个正整数<script type="math/tex">L</script>，问是否能存在一个<script type="math/tex">S</script>，使得<script type="math/tex">|S| \leq L</script>.</p>
+<p>最优化的问题是，找到一个<script type="math/tex">S</script>, 使得<script type="math/tex">|S|</script>最小。</p>
+<h3 id="_3">复杂度分析</h3>
+<h4 id="_4">该问题和独立集问题一样难</h4>
+<p>首先证明顶点覆盖不比独立集简单，对于一张图，若求出了这张图的最大独立集<script type="math/tex">T</script>, 取<script type="math/tex">S = V-T</script>, 我们断言<script type="math/tex">S</script>便是这张图的最小顶点覆盖。</p>
+<p>首先证明<script type="math/tex">S</script>是一个顶点覆盖，采用反证法，若是存在一条边<script type="math/tex">ab</script>没有被覆盖，由构造过程可以得到<script type="math/tex">a,b\in T</script>, 则与<script type="math/tex">T</script>是独立集矛盾，于是<script type="math/tex">S</script>是一个顶点覆盖。</p>
+<p>再证明<script type="math/tex">S</script>是一个最小的顶点覆盖，依旧采用反证法，假设<script type="math/tex">S</script>并不是一个最小的顶点覆盖，那么一定存在一个点<script type="math/tex">x</script>可以去掉，使得<script type="math/tex">S-\{x\}</script>还是一个顶点覆盖，也就是说对于<script type="math/tex">\forall ax\in E</script>，<script type="math/tex">a</script>一定在<script type="math/tex">S</script>中，则<script type="math/tex">a</script>一定不在<script type="math/tex">T</script>中, 于是在<script type="math/tex">T</script>中加入<script type="math/tex">x</script>依旧是一个独立集, 与<script type="math/tex">T</script>是最大独立集相矛盾, 于是<script type="math/tex">S</script>一定是一个最小顶点覆盖.</p>
+<p>并且独立集问题不比顶点覆盖问题简单, 假设已知最小顶点覆盖<script type="math/tex">S</script>, 则取<script type="math/tex">T = V-S</script>, 我们断言<script type="math/tex">T</script>是最大独立集, 证明比较简单, 不再赘述.</p>
+<h4 id="np-complete">该问题是NP-Complete问题</h4>
+<p>通过<script type="math/tex">Cook's</script>
+<script type="math/tex">theorem</script>, 我们首先知道<script type="math/tex">SAT \in NP-Complete</script>.</p>
+<p>可以通过多项式归约链推导得到<script type="math/tex">VC</script>即<script type="math/tex">Vertex\quad cover</script>, <script type="math/tex">VC \in NP-Complete</script>
+</p>
+<p>这里暂时不给出证明, 但愿不会咕(</p>
+<p>仅仅给出推导链</p>
+<p>
+<script type="math/tex">SAT \propto 3SAT \propto VC</script>
+</p>
+<h3 id="_5">二分图下的情况</h3>
+<p>konig 柯尼希定理 暂时没啥想法, 路子是对的, 继续想想.</p>
+<p>总之在这种情况下并不是<script type="math/tex">NP</script>问题，可以通过网络流方法在多项式时间内得到解。</p>
+<h3 id="_6">一般情况下</h3>
+<p>在一般情况下只能寻找近似算法。</p>
+<h4 id="_7">度数贪心</h4>
+<p>一种比较简单的贪心策略是通过度数从大到小进行贪心，这种算法的近似度上界比较难以确定，但是可以比较容易地构造出一个近似度的下界。</p>
+<p><img alt="image-20201103193010767" src="image-20201103193010767.png" /></p>
+<p>在这张图上这样的贪心做法仅仅得到<script type="math/tex">\Omega(\log{n})</script>的近似度。</p>
+<h4 id="_8">另一种简单贪心</h4>
+<p>考虑以任意顺序枚举每一条边，如果这条边没被覆盖，则选择这一条边的两个点。</p>
+<p>这个简单的做法可以得到近似度为<script type="math/tex">2</script>优秀效果。</p>
+<h4 id="_9">加权下的顶点覆盖问题</h4>
+<p>不妨假设选择第<script type="math/tex">i</script>个点的代价为<script type="math/tex">w_{i}</script>, 令<script type="math/tex">x_{i} \in \{0,1\}</script>表示是否选择第<script type="math/tex">i</script>个点。</p>
+<p>问题便是最小化<script type="math/tex">\large\sum_{i}^{n}w_{i}x_{i}</script>
+</p>
+<p>约束条件为<script type="math/tex">\sum_{ij\in E}x_{i}+x_{j}\geq 1</script>
+</p>
+<p>考虑直接将这个形式进行松弛，即令<script type="math/tex">x_{i}\geq 0</script>
+</p>
+<p>假设现在得到的解为<script type="math/tex">S</script>
+</p>
+<p>那么根据线性规划松弛的原理，一定有<script type="math/tex">S \leq OPT</script>
+</p>
+<p>下面进行取整来判断如何根据线性规划得到的解来构造出原问题的解。</p>
+<p>如果<script type="math/tex">x_{i} \geq \frac{1}{2}</script>则选择<script type="math/tex">i</script>点。</p>
+<p>这样显然得到的点列是一个顶点覆盖。</p>
+<p>下面来考虑如何计算这个做法的近似度</p>
+<p>根据<script type="math/tex; mode=display">x_{i}\geq \frac{1}{2}</script>
+</p>
+<p>有<script type="math/tex; mode=display">w_{i}x_{i}\geq \frac{w_{i}}{2}</script>
+</p>
+<p>于是有<script type="math/tex; mode=display">\sum_{i}^{n}w_{i}x_{i}\geq \sum_{i}^{n}\frac{w_{i}}{2}</script>
+</p>
+<p>
+<script type="math/tex; mode=display">\sum_{i}^{n} \frac{w_{i}*x^{'}_{i}}{2} \leq \sum_{i}^{n}w_{i}\hat{x{i}} \leq \sum_{i}^{n}w_{i}x_{i} \leq OPT</script>
+</p>
+<p>于是有<script type="math/tex">\frac{S}{OPT} \leq 2</script>
+</p>
+<h4 id="_10">加权形式下的原始对偶算法</h4>
+<p>不妨假设选择第<script type="math/tex">i</script>个点的代价为<script type="math/tex">w_{i}</script>, 令<script type="math/tex">x_{i} \in \{0,1\}</script>表示是否选择第<script type="math/tex">i</script>个点。</p>
+<p>问题便是最小化<script type="math/tex">\large\sum_{i}^{n}w_{i}x_{i}</script>
+</p>
+<p>约束条件为<script type="math/tex">\sum_{ij\in E}x_{i}+x_{j}\geq 1</script>
+</p>
+<p>考虑直接将这个形式进行松弛，即令<script type="math/tex">x_{i}\geq 0</script>
+</p>
+<p>依旧是一开始形式的线性规划。</p>
+<p>现在将这个线性规划对偶。</p>
+<p>即最大化<script type="math/tex">\sum_{i}^{n}y_{i}</script>
+</p>
+<p>约束条件为<script type="math/tex">\sum y_{j} \leq w_{i}</script>
+</p>
+<p>则<script type="math/tex">y_{i}</script>还可以增加，使得某个不等式收紧，则得到最小的增加量<script type="math/tex">y_{i}</script>
+</p>
+<p>更新整个过程。</p>
+<p>取那些取到等号的<script type="math/tex">i</script>，构成变量。</p>
+<p>可以发现当<script type="math/tex">w_{i}=1</script>的时候，整个过程等价于一开始的贪心算法。</p>
+<p>下面证明这个算法的近似度。</p>
+<p>首先根据对偶的性质有<script type="math/tex">\sum y_{i} \leq OPT</script>
+</p>
+<p>
+<script type="math/tex">2\sum{y} \geq \sum w</script>
+</p>
+<p>于是近似度为<script type="math/tex">2</script>
+</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
