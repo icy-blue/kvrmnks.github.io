@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Burnside引理与Polya计数原理 - Kvrmnks's Blog</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Kvrmnks's Blog</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../about/" class="nav-link">About</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../" class="nav-link">Blog</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h3 id="burnsidepolya">Burnside引理与Polya计数原理</h3>
+<h4 id="burnside">Burnside引理简介</h4>
+<p>这个定理主要叙述了在置换群作用下元素的不动情况。</p>
+<p>为了方便起见，我们引入颜色的概念，假设一个长度为<script type="math/tex">n</script>的向量<script type="math/tex">x</script>,其中<script type="math/tex">x</script>的第<script type="math/tex">i</script>维度记为<script type="math/tex">x_{i}</script>,定义一共有<script type="math/tex">m</script>种颜色，即<script type="math/tex">x_{i}\in{1,2,\cdots,m}</script>。假设<script type="math/tex">y</script>是<script type="math/tex">n</script>上的一个置换，则<script type="math/tex">y(x)</script>表示相应颜色的置换。</p>
+<p>设<script type="math/tex">G</script>是一个置换群，设两个本质不同的染色为两个维度为<script type="math/tex">n</script>的向量<script type="math/tex">x</script>与<script type="math/tex">t</script>，且不存在<script type="math/tex">g \in G</script>，使得<script type="math/tex">g(x) = y</script>.</p>
+<p>假设所有的染色方案集合为<script type="math/tex">S</script>.</p>
+<p>则可以发现上面定义了一种等价关系。</p>
+<p>
+<script type="math/tex">Burnside</script>引理给出了计数这个商集大小的方法。</p>
+<h4 id="burnside_1">Burnside引理感性证明</h4>
+<p>我知道自己没法写出严格的证明，我只能按照自己的思路整理出合我自己思路的证明思路。</p>
+<p>严格思路可以参考<a href="https://zhuanlan.zhihu.com/p/80261375">链接</a></p>
+<p>该定理的证明方式主要基于对于<script type="math/tex">G</script>的不同分组计数方式。</p>
+<p>我们知道不同的<script type="math/tex">G</script>的计数方式可以形成一个等式，而只要我们要求的商集大小存在于这个等式之中，我们就可以求得商集的大小。</p>
+<p>我们考虑<script type="math/tex">G</script>是一个置换群，将其作用于<script type="math/tex">\{1,2,\cdots,n\}</script>上亦是一个等价关系，先考虑其中的一个等价类<script type="math/tex">[k]</script>.</p>
+<p>不妨记<script type="math/tex">[k] = \{k,k_{1},\cdots,k_{p}\}</script>,其中由等价关系得到对于任意一个<script type="math/tex">k_{i}</script>都存在一个<script type="math/tex">g_{i} \in G</script>使得<script type="math/tex">g_{i}(k_{i})=k</script>
+</p>
+<p>更感性一点，我们可以发现通过<script type="math/tex">k_{i}</script>可以找到一个<script type="math/tex">G</script>的子集<script type="math/tex">G_{k_{i}}</script>对于这个子集中的任意一个元素，都是一个置换，且是一个可以从<script type="math/tex">k_{i} \rightarrow k</script>的置换。</p>
+<p>根据这样的一个简单说明,我们知道<script type="math/tex">[k]</script>中的每个元素都对应了一个<script type="math/tex">G</script>的子集，并且这些子集是无交的而且这些的并是<script type="math/tex">G</script>，想想为什么吧。</p>
+<p>于是我们得到了一个关于<script type="math/tex">|G|</script>的式子，即<script type="math/tex; mode=display">|G| = \sum_{\hat{k}\in [k]}|G_{\hat{k}}|</script>
+</p>
+<p>到此为止便是简单思路能够思考到的位置了。</p>
+<p>下面就是些只能仰慕的推导了。</p>
+<p>数学家们发现<script type="math/tex">|G_{\hat{k}}|</script>是相等的。</p>
+<p>可以简单在这里证明一下。</p>
+<p>令<script type="math/tex">G_{k_{i}} = \{g_{1},\cdots,g_{q}\}</script>，取<script type="math/tex">g_{1}</script>作用于<script type="math/tex">G_{k}</script>,记结果为<script type="math/tex">\hat{G_{k}}</script>现在<script type="math/tex">\hat{G_{k}}</script>的每个元素都是<script type="math/tex">k \rightarrow k_{i}</script>的一个置换，根据定义<script type="math/tex">\hat{G_{j}} \subseteq G_{k}</script> 用来比大小的话就是<script type="math/tex">|G_{k_{i}}| = \hat{G_{k}} \leq G_{k}</script>
+</p>
+<p>接下来只要证明反向包含就行了。</p>
+<p>任取<script type="math/tex">G_{k_{i}}</script>的一个元素<script type="math/tex">g_{j}</script>, 显然<script type="math/tex">g_{j} = g_{1}*g_{1}^{-1}*g_{j}</script>,其中<script type="math/tex">g_{1}^{-1}*g_{j} \in G_{k}</script>,于是<script type="math/tex">g_{j} \in \hat{G_{k}}</script>，于是反向包含就证好了。</p>
+<p>于是我们得到了<script type="math/tex; mode=display">|G| = |G_{k}||[k]|</script>
+</p>
+<p>为了思路的连贯，并没有保持和参考文章一样的记号。</p>
+<p>接下来，对于<script type="math/tex">G</script>与<script type="math/tex">S</script>列一个矩阵，定义<script type="math/tex">\mu(g,s) = [g(s)==s]</script>
+</p>
+<p>
+<script type="math/tex">\sum_{g}\sum_{s}\mu(g,s) = \sum_{s}|G_{s}| = t |G_{s}|[s] = t|G|</script>
+</p>
+<p>于是最后的结果为<script type="math/tex">t = \frac{1}{|G|}\sum_{g}\sum_{s}\mu(g,s)</script>
+</p>
+<h4 id="polya">Polya计数原理的简述与感性证明</h4>
+<p>之所以将它称之为计数原理在于这个方法简化了上面引理的一部分计算。</p>
+<p>引用上面Burnside引理的结果<script type="math/tex">t = \frac{1}{|G|}\sum_{g}\sum_{s}\mu(g,s)</script>
+</p>
+<p>Polya计数原理简化了<script type="math/tex">\sum_{s}\mu(g,s)</script>的计算。</p>
+<p>原理在于对每个置换进行循环分解。</p>
+<p>大概举个例子<script type="math/tex">g = (1)(2,3)(4,5,7)(6)(9)</script>
+</p>
+<p>可以理性观察这个置换，只有每个括号里的元素颜色一样的时候才会对答案有贡献。</p>
+<p>于是<script type="math/tex">\sum_{s}\mu(g,s) = m^{\#g}</script>
+</p>
+<p>其中<script type="math/tex">\#g</script>表示<script type="math/tex">g</script>再进行循环分解后有多少个括号。</p>
+<p>于是上面的式子就变成了<script type="math/tex">t = \frac{1}{|G|}\sum_{g}m^{\#g}</script>
+</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

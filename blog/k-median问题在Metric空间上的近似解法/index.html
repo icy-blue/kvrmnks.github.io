@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>k median问题在Metric空间上的近似解法 - Kvrmnks's Blog</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Kvrmnks's Blog</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../about/" class="nav-link">About</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../" class="nav-link">Blog</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#k-median" class="nav-link">k-median问题</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="k-median">k-median问题</h2>
+<h3 id="_1">问题定义</h3>
+<p>先定义一下用到的符号</p>
+<p>空间中有许多工厂，也有许多客户，集合<script type="math/tex">F</script>表示工厂集合，集合<script type="math/tex">C</script>表示客户集合，y要求给每个客户选择一个工厂，一个工厂可以被多个客户所选择，若一个工厂<script type="math/tex">x</script>被客户<script type="math/tex">y</script>所选择了，那么称<script type="math/tex">y</script>规<script type="math/tex">x</script>管理，定义距离函数为<script type="math/tex">d(x,y)，x \in F, y\in C</script>表示<script type="math/tex">y</script>选择<script type="math/tex">x</script>的代价。</p>
+<p>具体问题是找到最多<script type="math/tex">k</script>个工厂，管理所有的客户，使得距离函数和最小。</p>
+<p>这个问题在公制空间上的版本成为Metric K-median问题，是指<script type="math/tex">d(x,y)</script>满足正定性，对称性和三角形不等式。</p>
+<h3 id="np">NP？</h3>
+<p>这其实并不是一个NP-Hard问题，设计近似算法的原因在于加速运算</p>
+<p>
+<script type="math/tex">C_{2n}^{n}</script>依旧是多项式复杂度内的问题。</p>
+<h3 id="_2">局部搜索算法</h3>
+<p>首先可以通过简单分析得到选<script type="math/tex">k</script>个工厂一定比选择小于<script type="math/tex">k</script>个工厂要优。</p>
+<p>现在来介绍一种简单的近似算法。</p>
+<p>首先随机选择一个集合<script type="math/tex">S</script>, 使得<script type="math/tex">S \subset F</script>， 并且<script type="math/tex">|S| = k</script>， 为了描述方便，扩展一下距离函数的定义令<script type="math/tex">d(S,y) = \min{d(x,y)},x\in S, y\in C</script>
+</p>
+<p>然后枚举每个不在<script type="math/tex">S</script>中的工厂<script type="math/tex">z</script>, 尝试替换<script type="math/tex">S</script>中的工厂<script type="math/tex">x</script>, 如果能使得答案变得更优就换掉。</p>
+<p>这样就会得到一个局部最优解。</p>
+<p>实现思路非常简单而且是多项式时间复杂度的做法。</p>
+<h3 id="_3">近似度分析</h3>
+<p>令最优解所选择的工厂集合为<script type="math/tex">S^{*}</script>, 其中的元素一般使用<script type="math/tex">o</script>来表示。</p>
+<p>令上面算法得到的工厂集合为<script type="math/tex">S</script>, 其中的元素一般使用<script type="math/tex">s</script>来表示。</p>
+<p>令<script type="math/tex">C(x)，x\in F</script>表示<script type="math/tex">x</script>这个元素管理的客户的集合。</p>
+<p>首先定义一个术语叫做<strong>捕获</strong>，如果<script type="math/tex">C(s) \bigcap C(o) \geq \frac{1}{2}C(o)</script>则称<script type="math/tex">s</script>捕获了<script type="math/tex">o</script>。</p>
+<h4 id="_4">引理</h4>
+<p>如果<script type="math/tex">C(s) \bigcap C(o) < \frac{1}{2}C(o)</script>，则<script type="math/tex">C(o)</script>存在一个自己到自己的满射，使得每一个<script type="math/tex">x \in C(s)\bigcap C(o)</script>，可以映射到<script type="math/tex">C(o) - C(s)</script>.</p>
+<p>~~我也不知道为什么~~</p>
+<h4 id="_5">定理</h4>
+<p>该局部搜索算法的近似度为5</p>
+<h4 id="_6">证明</h4>
+<p>首先将<script type="math/tex">S</script>根据捕获的最优解中元素的个数分类</p>
+<ul>
+<li>
+<p>
+<script type="math/tex">S_{0}</script>集合表示每个元素不捕获任何最优解中的元素</p>
+</li>
+<li>
+<p>
+<script type="math/tex">S_{1}</script>集合表示每个元素都捕获最优解中的一个元素</p>
+</li>
+<li>
+<p>
+<script type="math/tex">S_{2}</script>集合表示每个元素都捕获最优解中的至少两个元素</p>
+</li>
+</ul>
+<p>下面进行<script type="math/tex">k</script>次交换，注意并不是连续进行<script type="math/tex">k</script>次交换，而是每次都从初始状态进行交换，综合考虑其的代价。</p>
+<p>考虑<script type="math/tex">s \in S_{1}</script>它所捕获的元素为<script type="math/tex">o</script>对于<script type="math/tex">C(o) \bigcap C(s)</script>的元素分配给<script type="math/tex">o</script>，更严格地这里将<script type="math/tex">C(o)</script>的所有元素全部分配<script type="math/tex">o</script>(这样相较于之前那种方式并不一定使得当前的答案更加优)，对于<script type="math/tex">C(o)-C(s)</script>的元素，因为其中的有个元素为<script type="math/tex">y</script>，假设在<script type="math/tex">S^{*}</script>中分配给了<script type="math/tex">o^{*}</script>,由于<script type="math/tex">s</script>已经捕获了<script type="math/tex">o</script>并且因为<script type="math/tex">s \in S_{1}</script>于是<script type="math/tex">o^{*}</script>一定不被<script type="math/tex">s</script>所捕获，于是在<script type="math/tex">C(o^{*})</script>存在一个单射，假设<script type="math/tex">s^{‘}</script>为其的像，同时<script type="math/tex">s^{’} \in C(s^{*})</script> ,于是将<script type="math/tex">s</script>分配给<script type="math/tex">s^{*}</script>
+</p>
+<p>由三角不等式<script type="math/tex; mode=display">d(y, s^{*}) \leq d(y,o^{*})+d(o^{*},s^{'}) + d(s^{'}, s^{*})</script>
+</p>
+<p>这样一次交换之后<script type="math/tex">Cost</script>的变化为</p>
+<p>
+<script type="math/tex">0 \leq Cost(S-s+o) - Cost(S) \leq \sum_{x \in C(o)} [d(o,x) - d(s,x)] + \sum_{x \in C(s) - C(o)}[d(y,o^{*})+d(o^{*},s^{'}) + d(s^{'}, s^{*}) - d(s, x)]</script>
+</p>
+<p>接下来考虑剩下的元素该如何交换，可以发现<script type="math/tex">S_{0}</script>中的每个元素最多使用<script type="math/tex">2</script>次便可以完成最优解中的每个元素被交换一次。</p>
+<p>同时可以发现也满足以上不等式。</p>
+<p>于是。</p>
+<p>将这个不等式累加<script type="math/tex">k</script>次，得到<script type="math/tex">0 \leq Cost(OPT) - Cost(S) + 2*(Cost(OPT) + Cost(OPT) + Cost(S) - Cost(S))</script>
+</p>
+<p>于是近似度为<script type="math/tex">5</script>.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
