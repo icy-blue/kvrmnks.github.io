@@ -4,26 +4,26 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
         
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Kvrmnks's Blog</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>X3C 1 与广义划分问题的NP完全性证明 - Kvrmnks's Blog</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 
-        <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap.min.js" defer></script>
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Kvrmnks's Blog</a>
+                <a class="navbar-brand" href="../..">Kvrmnks's Blog</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -33,14 +33,14 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
-                                <a href="." class="nav-link">Home</a>
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
                             </li>
                             <li class="navitem">
-                                <a href="about/" class="nav-link">About</a>
+                                <a href="../../about/" class="nav-link">About</a>
                             </li>
                             <li class="navitem">
-                                <a href="blog/" class="nav-link">Blog</a>
+                                <a href="../" class="nav-link">Blog</a>
                             </li>
                         </ul>
 
@@ -50,16 +50,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="about/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -78,7 +68,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#welcome-to-kvrmnkss-blog" class="nav-link">Welcome to Kvrmnks's Blog</a>
+            <li class="nav-item" data-level="2"><a href="#x3c-1-np" class="nav-link">X3C-1 与广义划分问题的NP完全性证明</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -87,8 +77,29 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="welcome-to-kvrmnkss-blog">Welcome to Kvrmnks's Blog</h2>
-<p>2333333</p></div>
+<h2 id="x3c-1-np">X3C-1 与广义划分问题的NP完全性证明</h2>
+<hr />
+<p>老师上课留的作业</p>
+<p>还蛮简单的（</p>
+<hr />
+<h3 id="x3c-1">X3C-1问题</h3>
+<p>首先你需要知道什么是X3C问题（假装你知道了，其实是我懒得写了</p>
+<p>X3C-1问题是任意两个元素的交的大小小于等于1</p>
+<h3 id="_1">证明</h3>
+<p>我们尝试用X3C来归约到X3C-1来证明这件事情。</p>
+<p>其实蛮简单的，假设<script type="math/tex">(a,b,c)</script>是X3C集合的一个元素。</p>
+<p>我们把它拆成以下5个元素</p>
+<p>
+<script type="math/tex; mode=display">(a, e1, e2) \\ (b, e3, e4) \\ (c, e5, e6) \\ (e1, e3, e5) \\ (e2, e4, e6)</script>
+</p>
+<p>正确性显然（</p>
+<h3 id="_2">广义划分问题</h3>
+<p>狭义的划分问题是将集合里的元素划分成两个部分，每个部分的和相等</p>
+<p>而广义划分问题便是使得两个部分保持1:2的关系</p>
+<h3 id="_3">证明</h3>
+<p>尝试从划分问题归约到这个问题。</p>
+<p>假设原集合为S</p>
+<p>加入<script type="math/tex">\frac{3}{2}S</script>与<script type="math/tex">\frac{7}{2}S</script>两个元素，正确性显然（</p></div>
             </div>
         </div>
 
@@ -97,12 +108,12 @@
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = ".",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js" defer></script>
+        <script src="../../js/base.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-        <script src="search/main.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -170,8 +181,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.1.2
-Build Date UTC : 2020-12-02 16:09:02.832230+00:00
--->
