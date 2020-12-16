@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Pytorch中都该保存些什么东西 - Kvrmnks's Blog</title>
+        <title>Index - Kvrmnks's Blog</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -93,7 +93,7 @@
 <p>最后一种是可选择的，第二种其实也算是可选择的，如果不考虑可重现性的话（</p>
 <p>类似的有些优化器只需要保存一下learning rate 就好，但是对于Adam这种类型其中优化参数可能随着训练过程发生变化的复杂优化器就有必要把里面的参数全都保存一下。</p>
 <p>对于第二条可以挑一个自己喜欢的模数，最好是质数</p>
-<pre><code class="python">seed = 998244353
+<pre><code class="language-python">seed = 998244353
 torch.manual_seed(seed)
 torch.cuda.manual_seed(seed)
 torch.cuda.manual_seed_all(seed)  
@@ -103,31 +103,27 @@ torch.manual_seed(seed)
 torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
 </code></pre>
-
 <p>对于第一条第三条来说，可以利用Pytorch自带的序列化方法进行保存</p>
-<pre><code class="python">def set_checkpoint(checkpoint_name, model, optimizer):
+<pre><code class="language-python">def set_checkpoint(checkpoint_name, model, optimizer):
     torch.save({
         'model': model.state_dict(),
         'optimizer': optimizer.state_dict()
     }, checkpoint_name);
 </code></pre>
-
 <p>加载的时候也很方便</p>
-<pre><code class="python">def load_checkpoint(checkpoint_name, model, optimzer):
+<pre><code class="language-python">def load_checkpoint(checkpoint_name, model, optimzer):
     _dict = torch.load(checkpoint_name)
     model.load_state_dict(_dict['model'])
     optimizer.load_state_dict(_dict['optimizer'])
 
 </code></pre>
-
 <p>具体调用过程</p>
-<pre><code class="python"># 保存阶段
+<pre><code class="language-python"># 保存阶段
 net = Net()
 optimizer = torch.optic.................
 set_checkpoint('你想要的的位置', net, optimzer)
 </code></pre>
-
-<pre><code class="python"># 加载阶段
+<pre><code class="language-python"># 加载阶段
 net = Net()
 optimizer = torch.optic.................
 load_checkpoint('你要的位置', net, optimizer);

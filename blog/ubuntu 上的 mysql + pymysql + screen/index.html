@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Ubuntu 上的 mysql + pymysql + screen - Kvrmnks's Blog</title>
+        <title>Index - Kvrmnks's Blog</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -76,32 +76,25 @@
 <pre><code>apt install mysql-server
 apt install mysql-client
 </code></pre>
-
 <p>然后先看 mysql 的版本, 一定要注意版本
 不同版本的 mysql 改密码的方式是不同的
 比如 mysql8.0 的情况下</p>
 <pre><code>use mysql;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '你的新密码'
 </code></pre>
-
 <p>退出即可</p>
 <p>当然可能不知道一开始的密码</p>
 <pre><code>vim /etc/mysql/debian.cnf
 </code></pre>
-
 <pre><code>screen -S 名字
 </code></pre>
-
 <pre><code>ctrl+a     d 离开当前
 </code></pre>
-
 <pre><code>screen -r 名字恢复
 </code></pre>
-
 <pre><code>Debian平台的my.cnf
 在/etc/mysql/mysql.conf.d/mysqld.cnf
 </code></pre>
-
 <pre><code>wait_timeout=31536000
 interactive_timeout=31536000
 </code></pre></div>

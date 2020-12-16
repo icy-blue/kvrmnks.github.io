@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>测试 - Kvrmnks's Blog</title>
+        <title>Index - Kvrmnks's Blog</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -67,12 +67,68 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#3-3satnp-complete" class="nav-link">3-3SAT问题NP-Complete性质的证明</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p><img alt="image-20200730175511403" src="image-20200730175511403.png" /></p></div>
+<h2 id="3-3satnp-complete">3-3SAT问题NP-Complete性质的证明</h2>
+<h3 id="3-3sat">3-3SAT问题</h3>
+<p>首先来说明一下这个记号，第一个<script type="math/tex">3</script>表示每个变量最多出现在<script type="math/tex">3</script>个子句中, 特别的，认为<script type="math/tex">\overline{x}</script>与<script type="math/tex">x</script>是一个变量，第二个<script type="math/tex">3</script>表示每个子句中最多出现3个变量。注意这里是最多，即有可能出现2个变量，或者一个变量。</p>
+<p>值得讨论的事，如果每个子句中都确定性地存在3个变量，这个问题将脱离<script type="math/tex">NP-Complete</script>类，变成一个<script type="math/tex">P</script>问题.</p>
+<h3 id="3sat3-3sat">从3SAT问题归约至3-3SAT问题</h3>
+<p>首先我们知道，要想实现这个归约，要解决的关键在于如何缩减一个变量的出现次数。</p>
+<p>显然我们可以通过添加新的析取子句来达到这个目的。</p>
+<p>可以通过真值表直接构造</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a *b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>以上就是要构造的子句
+可以直接来化简一下
+<script type="math/tex; mode=display">(a\bigcap b) \bigcup (\overline{a}\bigcap \overline{b})</script>
+化简得到
+<script type="math/tex; mode=display">(b\bigcup \overline{a})\bigcap (a \bigcup \overline{b})</script>
+</p>
+<p>发现可以直接拆成两项
+<script type="math/tex; mode=display">(b \bigcup \overline{a})\quad (a \bigcup \overline{b})</script>
+</p>
+<p>构造这两项的意义便是，如果存在这两个等式，那么a,b的值一定是相等的。</p>
+<p>于是考虑在3SAT问题中出现的一系列出现<script type="math/tex">x</script>的表达式</p>
+<p>一定可以通过这种方式将<script type="math/tex">x</script>拆成不同的变量，使得满足或不满足，可以发现一共只需要<script type="math/tex">n^2</script>级的代价。</p>
+<p>证完了~</p></div>
             </div>
         </div>
 

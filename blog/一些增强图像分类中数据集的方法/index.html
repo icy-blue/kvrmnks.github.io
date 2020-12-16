@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>一些增强图像分类中数据集的方法 - Kvrmnks's Blog</title>
+        <title>Index - Kvrmnks's Blog</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -101,7 +101,7 @@
 <p>我们仍然采用<a href="../%E6%B5%85%E8%B0%88pytorch%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E4%BD%9C%E4%B8%BA%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E7%A7%8D%E5%A7%BF%E5%8A%BF/">浅谈pytorch加载图片作为训练数据的一种姿势</a>中对读入图片做预处理的方式，来自己写一个class来随机缩放图片。</p>
 <p>基本的思路就是，确定一个缩放比例的上下界，在这个上下界之间随机一个大小，如果要缩小就把图片缩小周围补上空白，如果放大就先把图片放大，然后从中间截取出需要的大小。</p>
 <p>废话少说直接上代码</p>
-<pre><code class="python">from torchvision import transforms
+<pre><code class="language-python">from torchvision import transforms
 class picPull():
     def __init__(self, output_size):
         self.os = output_size
@@ -118,7 +118,6 @@ class picPull():
             ret = transforms.CenterCrop(self.os).__call__(img)
             return ret
 </code></pre>
-
 <p>其中可能有两个奇怪的东西，第一个是MyResize，见<a href="../%E6%B5%85%E8%B0%88pytorch%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E4%BD%9C%E4%B8%BA%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E7%A7%8D%E5%A7%BF%E5%8A%BF/">浅谈pytorch加载图片作为训练数据的一种姿势</a>，第二个是transforms.CenterCrop，这是torchvision中自带的中心截取，更多的方法见<a href="https://blog.csdn.net/weixin_38533896/article/details/86028509">Pytorch：transforms的二十二个方法</a></p>
 <hr />
 <h2 id="_2">图片随机旋转</h2>
@@ -135,7 +134,7 @@ class picPull():
 <hr />
 <p>更新了更新了 现在是2020.9.20 还把之前的一个小错误给改了</p>
 <p>然后加了个完成的方便以后用？</p>
-<pre><code class="python">from PIL import Image
+<pre><code class="language-python">from PIL import Image
 import data
 import numpy as np
 import matplotlib.pyplot as plt

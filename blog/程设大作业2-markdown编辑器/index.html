@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>程设大作业2 markdown编辑器 - Kvrmnks's Blog</title>
+        <title>Index - Kvrmnks's Blog</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -74,8 +74,9 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p>建一篇blog记录一下进度
-<!--more--></p>
+<p>建一篇blog记录一下进度</p>
+<!--more-->
+
 <h4 id="2020-4-28">2020-4-28</h4>
 <p>起步
 试图安装双系统，失败
@@ -106,7 +107,7 @@ QFile::copy(":/new/prefix1/project/hoedown.exe",tmp）；
 然后把资源目录的文件复制进去
 就可以用tmp访问了</p>
 <h5 id="_3">文件读写</h5>
-<pre><code class="cpp">    QFile out(&quot;dududusdshdksjhdksout.txt&quot;);
+<pre><code class="language-cpp">    QFile out(&quot;dududusdshdksjhdksout.txt&quot;);
     if(out.open(QIODevice::WriteOnly)){
        QTextStream ts(&amp;out);
         ts&lt;&lt;textTextEdit-&gt;toPlainText();
@@ -115,7 +116,6 @@ QFile::copy(":/new/prefix1/project/hoedown.exe",tmp）；
         qDebug(&quot;wrong&quot;);
     }
 </code></pre>
-
 <h5 id="_4"></h5>
 <h5 id="exe">如何调用外部的exe</h5>
 <p>QProcess

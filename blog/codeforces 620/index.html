@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Codeforces 620 - Kvrmnks's Blog</title>
+        <title>Index - Kvrmnks's Blog</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -78,13 +78,14 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p>老年人来打场div2
-<!--more--></p>
+<p>老年人来打场div2</p>
+<!--more-->
+
 <h4 id="a">A</h4>
 <h5 id="_1">题目简介</h5>
 <p>两只兔子往中间跳,问能不能跳到一起,能输出时间</p>
 <p>傻逼题</p>
-<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 int main(){
     int t;
@@ -104,12 +105,11 @@ int main(){
     return 0;
 } 
 </code></pre>
-
 <h4 id="b">B</h4>
 <h5 id="_2">题目大意</h5>
 <p>给一些长度一样长的字符串,问最多能构造出多长的回文串</p>
 <p>傻逼题*2</p>
-<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 const int MAXN = 105;
 bool isRev[MAXN];
@@ -251,14 +251,13 @@ int main(){
     return 0;
 }
 </code></pre>
-
 <h4 id="c">C</h4>
 <h5 id="_3">题目大意</h5>
 <p>在一个数轴上,给定起点,1s只能走一个单位长度,给n个区间,问能不能,在相应的时间属于相应的区间</p>
 <p>数据范围差评,好久没打cf了,总是想找个1e7+的复杂度...</p>
 <p>直接每步维护一个区间</p>
 <p>xjb求交就行了</p>
-<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 typedef long long ll;
 const int MAXN = 120;
@@ -293,14 +292,13 @@ int main(){
     return 0;
 } 
 </code></pre>
-
 <h4 id="d">D</h4>
 <h5 id="_4">题目大意</h5>
 <p>给一个大于小于号的序列,构造两个数列,每个数&gt;=1,&lt;=n,要求一个LIS最大,一个LIS最小</p>
 <p>heheda,比赛的时候看错题了</p>
 <p>考虑求LIS的nlogn做法,实际上我们只需要在二分的那一步改成贪心,用贪心维护那个上升数列就好了</p>
 <p>构造的时候我是先把数分层,然后每层构造,有些小细节见代码</p>
-<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 const int MAXN = 200050;
 int Q,n;
@@ -416,7 +414,6 @@ int main(){
     return 0;
 }
 </code></pre>
-
 <p>其实原题不需要构造的答案是个排列</p>
 <p>~~我只是不会写不是排列的做法~~</p>
 <h4 id="e">E</h4>
@@ -428,7 +425,7 @@ int main(){
 <p>3.a -&gt; y -&gt; x -&gt; b</p>
 <p>然后只要满足小于k且奇偶性一样就行</p>
 <p>好久没写树链剖分了,写得头疼...</p>
-<pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 const int MAXN = 200050;
 int sz[MAXN],top[MAXN],dep[MAXN],to[MAXN],nx[MAXN],h[MAXN],tot;
@@ -499,7 +496,6 @@ int main(){
     return 0;
 } 
 </code></pre>
-
 <h4 id="f">F</h4>
 <h5 id="_6">简单口胡</h5>
 <p>老年人不想写线段树了...</p>
